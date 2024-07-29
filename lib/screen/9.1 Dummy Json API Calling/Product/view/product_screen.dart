@@ -31,17 +31,20 @@ class ProductPage extends StatelessWidget {
         ),
         body: FutureBuilder(
           future: Provider.of<ProductProvider>(context, listen: false)
-          // provider create method put
+              // provider create method put
               .jsonParsing(),
+
           builder: (context, snapshot) {
 
             if (snapshot.hasData) {
+
               ProductModal? pro = snapshot.data;
+
+
               return ListView.builder(
                 itemBuilder: (context, index) => Card(
                   child: ListTile(
                     title: Text(pro!.products[index].title),
-
                   ),
                 ),
               );

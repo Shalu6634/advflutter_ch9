@@ -9,14 +9,11 @@ void main() {
   runApp(
     MultiProvider(
       providers: [
-        ChangeNotifierProvider(
-          create: (context) => PixabayProvider(),
-        ),
+
         ChangeNotifierProvider(
           create: (context) => RecipeProvider(),
-        ),
-        ChangeNotifierProvider(
-          create: (context) => ProductProvider(),
+        ), ChangeNotifierProvider(
+          create: (context) => PixabayProvider(),
         ),
 
       ],

@@ -23,7 +23,7 @@ class PixabayProvider extends ChangeNotifier
   async {
     final data = await apiHelper.fetchData(img);
     pixabayModal = PixabayModal.fromJson(data);
-    notifyListeners();
+
     return pixabayModal;
   }
 
