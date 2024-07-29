@@ -71,11 +71,7 @@ class DetailPage extends StatelessWidget {
                                 style: TextStyle(
                                     fontSize: 20, fontWeight: FontWeight.w500),
                               ),
-                              Text(
-                                '${recipeProvider.recipeModal!.recipes[selectedIndex].difficulty}',
-                                style: TextStyle(
-                                    fontSize: 20, fontWeight: FontWeight.w400),
-                              ),
+
                               SizedBox(
                                 width: width * 0.4,
                               ),
@@ -228,10 +224,7 @@ class DetailPage extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
-                        'Difficulty: ${ha.recipes[selectedIndex].difficulty}',
-                        style: const TextStyle(color: Colors.white70),
-                      ),
+
                       Text(
                         '⏱ ${ha.recipes[selectedIndex].cookTimeMinutes} - ${ha.recipes[selectedIndex].prepTimeMinutes} min',
                       ),

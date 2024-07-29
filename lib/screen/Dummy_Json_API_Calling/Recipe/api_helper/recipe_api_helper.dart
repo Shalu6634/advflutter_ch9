@@ -7,13 +7,13 @@ class RecipeApiHelper {
 
   String api = 'https://dummyjson.com/recipes';
 
-  Future<Map> Recipe_Api_Calling() async
-  {
+  Future<Map> Recipe_Api_Calling()
+   async {
     Uri Url = Uri.parse(api);
     Response response = await http.get(Url);
     if (response.statusCode == 200) {
       final json = response.body;
-      final Map data = jsonDecode(json);
+      Map data = jsonDecode(json);
       return data;
     } else {
       return {};

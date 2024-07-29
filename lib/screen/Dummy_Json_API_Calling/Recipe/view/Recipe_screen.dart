@@ -1,20 +1,24 @@
-
+import 'package:advflutter_ch9/screen/Dummy_Json_API_Calling/Recipe/modal/Recipe_modal.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../Provider/Recipe_provider.dart';
-import '../modal/recipe_modal.dart';
+import '../provider/recipe_provider.dart';
 
-class RecipePage  extends StatelessWidget {
-  const RecipePage ({super.key});
 
+
+
+
+class RecipePage extends StatelessWidget {
+  const RecipePage({super.key});
+
+  @override
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
     RecipeProvider recipeProviderFalse =
-    Provider.of<RecipeProvider>(context, listen: false);
+        Provider.of<RecipeProvider>(context, listen: false);
     RecipeProvider recipeProviderTrue =
-    Provider.of<RecipeProvider>(context, listen: true);
+        Provider.of<RecipeProvider>(context, listen: true);
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.white,
@@ -33,8 +37,7 @@ class RecipePage  extends StatelessWidget {
         body: Column(
           children: [
             Padding(
-              padding: const EdgeInsets.only(
-                  top: 20, left: 10, right: 10),
+              padding: const EdgeInsets.only(top: 20, left: 10, right: 10),
               child: Center(
                 child: Container(
                   height: 180,
@@ -45,7 +48,6 @@ class RecipePage  extends StatelessWidget {
                       image: const DecorationImage(
                         image: AssetImage('assets/img/food.jpg'),
                         fit: BoxFit.cover,
-
                       ),
                       boxShadow: const [
                         BoxShadow(
@@ -53,11 +55,13 @@ class RecipePage  extends StatelessWidget {
                             offset: Offset(0, 2),
                             // spreadRadius: 1,
                             blurRadius: 1)
-                      ]
-                  ),
+                      ]),
                 ),
               ),
-            ),SizedBox(height: 30,),
+            ),
+            SizedBox(
+              height: 30,
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -66,17 +70,19 @@ class RecipePage  extends StatelessWidget {
                   child: Text(
                     'All Recipes',
                     textAlign: TextAlign.left,
-                    style: TextStyle(color: Colors.black, fontSize: 20,fontWeight: FontWeight.bold),
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold),
                   ),
                 ),
-
               ],
             ),
             Expanded(
               child: FutureBuilder(
-                future: Provider.of<RecipeProvider>(context,listen: false).fromMap() ,
-                builder:(context,snapShot) {
-                  RecipeModal? ha = snapShot.data as RecipeModal?;
+                future: Provider.of<RecipeProvider>(context,listen: false).fromJsonData(),
+                builder: (context, snapShot) {
+                  RecipeModal? ha = snapShot.data;
                   if (snapShot.hasData) {
                     return Padding(
                       padding: const EdgeInsets.all(5.0),
@@ -93,9 +99,16 @@ class RecipePage  extends StatelessWidget {
                         },
                       ),
                     );
-                  } else {
+                  }
+                  else if (snapShot.hasError) {
+                    return Center(
+                      child: Text(snapShot.error.toString()),
+                    );
+                  }else {
                     return const Center(
-                      child: CircularProgressIndicator(color: Colors.black,),
+                      child: CircularProgressIndicator(
+                        color: Colors.black,
+                      ),
                     );
                   }
                 },
@@ -117,10 +130,9 @@ class RecipePage  extends StatelessWidget {
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20),
             image: DecorationImage(
-              image: NetworkImage(ha.recipes[index].image),
-              fit: BoxFit.cover,
-              opacity: 0.9
-            ),
+                image: NetworkImage(ha.recipes[index].image),
+                fit: BoxFit.cover,
+                opacity: 0.9),
           ),
         ),
         Expanded(
@@ -138,26 +150,18 @@ class RecipePage  extends StatelessWidget {
                 ),
                 const SizedBox(height: 5),
                 Text(
-                  'Difficulty: ${ha.recipes[index].difficulty}',
-                ),
-                const SizedBox(height: 5),
-                Text(
                   'Cuisine: ${ha.recipes[index].cuisine}',
-
                 ),
                 const SizedBox(height: 5),
                 Text(
                   'Servings: ${ha.recipes[index].servings}',
-
-                ),Text(
-                  'cookTimeMinutes: ${ha.recipes[index].cookTimeMinutes
-                  }',
-
+                ),
+                Text(
+                  'cookTimeMinutes: ${ha.recipes[index].cookTimeMinutes}',
                 ),
                 const SizedBox(height: 5),
                 Text(
                   '⭐ ⭐ ⭐',
-
                 ),
               ],
             ),
@@ -167,4 +171,5 @@ class RecipePage  extends StatelessWidget {
     );
   }
 }
+
 int selectedIndex = 0;

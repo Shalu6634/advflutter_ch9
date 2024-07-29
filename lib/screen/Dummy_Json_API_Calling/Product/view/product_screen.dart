@@ -1,7 +1,9 @@
-import 'package:advflutter_ch9/screen/9.1%20Dummy%20Json%20API%20Calling/Product/modal/product_modal.dart';
-import 'package:advflutter_ch9/screen/9.1%20Dummy%20Json%20API%20Calling/Product/provider/product_provider.dart';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+import '../modal/product_modal.dart';
+import '../provider/product_provider.dart';
 
 class ProductPage extends StatelessWidget {
   const ProductPage({super.key});
@@ -37,9 +39,7 @@ class ProductPage extends StatelessWidget {
           builder: (context, snapshot) {
 
             if (snapshot.hasData) {
-
               ProductModal? pro = snapshot.data;
-
 
               return ListView.builder(
                 itemBuilder: (context, index) => Card(
