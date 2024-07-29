@@ -7,8 +7,8 @@ import '../screen/9.2 Call Pixabay API & Represent in UI/search_api/view/Pixabay
 
 class AppRoutes {
   static Map<String, Widget Function(BuildContext)> routes = {
-      '/pis': (context) => RecipePage(),
-    '/': (context) => PixabayApi(),
+      '/': (context) => RecipePage(),
+    '/pis': (context) => PixabayApi(),
     '/re': (context) => ProductPage(),
     '/detail': (context) => DetailPage(),
 

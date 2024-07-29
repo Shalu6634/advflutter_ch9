@@ -9,13 +9,11 @@ void main() {
   runApp(
     MultiProvider(
       providers: [
-
         ChangeNotifierProvider(
           create: (context) => RecipeProvider(),
         ), ChangeNotifierProvider(
           create: (context) => PixabayProvider(),
         ),
-
       ],
       child:  MaterialApp(
         debugShowCheckedModeBanner: false,
