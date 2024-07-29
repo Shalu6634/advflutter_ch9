@@ -6,9 +6,9 @@ class PixabayModal {
 
   PixabayModal({required this.hits});
 
-  factory PixabayModal.fromMap(Map m1) {
+  factory PixabayModal.fromJson(Map m1) {
     return PixabayModal(
-        hits: (m1['hits'] as List).map((e) => Hit.fromMap(e)).toList());
+        hits: (m1['hits'] as List).map((e) => Hit.fromJson(e)).toList());
   }
 }
 
@@ -26,7 +26,7 @@ class Hit {
       required this.views,
       required this.downloads});
 
-  factory Hit.fromMap(Map m1) {
+  factory Hit.fromJson(Map m1) {
     return Hit(
         userImageURL: m1['userImageURL'],
         webformatURL: m1['webformatURL'],

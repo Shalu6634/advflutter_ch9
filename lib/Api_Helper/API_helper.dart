@@ -4,8 +4,12 @@ import 'package:http/http.dart';
 
 class ApiHelper {
 
-  Future<Map> apiCalling(String search) async {
-    Uri url = Uri.parse("https://pixabay.com/api/?key=45140193-022d8adb1e5eee0ac2ab1bcac&q=$search&image_type=photo&pretty=true");
+
+  Future<Map> fetchData(String search) async {
+
+    String api = "https://pixabay.com/api/?key=45140193-022d8adb1e5eee0ac2ab1bcac&q=$search&image_type=car";
+
+    Uri url = Uri.parse(api);
     Response response = await http.get(url);
     if (response.statusCode == 200) {
       final json = response.body;

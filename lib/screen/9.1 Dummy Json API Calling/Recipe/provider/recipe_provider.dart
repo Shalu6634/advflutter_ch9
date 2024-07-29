@@ -1,20 +1,28 @@
 import 'package:flutter/cupertino.dart';
 
-import '../../../9.2 Call Pixabay API & Represent in UI/search_api/modal/all_api_modal.dart';
 import '../api_helper/recipe_api_helper.dart';
+import '../modal/recipe_modal.dart';
 
-class RecipeProvider extends ChangeNotifier
-{
-  RecipeApiHelper apiHelper = RecipeApiHelper();
-  PixabayModal? recipeModal;
+class RecipeProvider extends ChangeNotifier {
+  RecipeApiHelper recipeApiHelper = RecipeApiHelper();
+  RecipeModal? recipeModal;
 
-  Future<PixabayModal?> fromMap()
-  async {
-    final data = await apiHelper.Recipe_Api_Calling();
-    recipeModal = PixabayModal.fromMap(data);
-    notifyListeners();
-    return recipeModal;
+  String search = '';
 
+  Future<RecipeModal?> fromMap() async {
+    try {
+      final data = await recipeApiHelper.Recipe_Api_Calling();
+      if (data.isNotEmpty) {
+        recipeModal = RecipeModal.fromJson(data);
+        notifyListeners();
+        return recipeModal;
+      } else {
+        throw Exception('No data received from API');
+      }
+    } catch (e) {
+      print('Error in fromMap: $e');
+      return null;
+    }
   }
 
 }

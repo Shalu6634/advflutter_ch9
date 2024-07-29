@@ -1,18 +1,16 @@
-import 'dart:convert';
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
-import '../../../9.2 Call Pixabay API & Represent in UI/search_api/modal/all_api_modal.dart';
+import 'package:flutter/material.dart';
 import '../api_helper/product_api_helper.dart';
+import '../modal/product_modal.dart';
 
 class ProductProvider extends ChangeNotifier {
-  ProductApiHelper apiHelper = ProductApiHelper();
-  PixabayModal? productModal;
+  ProductApiHelper productApiHelper = ProductApiHelper();
+   ProductModal? productModal;
 
-  Future<PixabayModal?> jsonParsing() async {
-    final data = await apiHelper.productApiCalling();
-    productModal = PixabayModal.fromMap(data) ;
-    notifyListeners();
+  Future<ProductModal?> jsonParsing() async {
+    final data = await productApiHelper.productApiCalling();
+    productModal = ProductModal.fromJson(data) ;
+    print('==================================================');
     return productModal;
   }
 

@@ -1,7 +1,7 @@
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../modal/all_api_modal.dart';
+
+import '../modal/Pixabay_api_modal.dart';
 import '../provider/PixabayApiProvider.dart';
 
 class PixabayApi extends StatelessWidget {
@@ -9,79 +9,60 @@ class PixabayApi extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    PixabayProvider pixabayProvider = Provider.of(context);
+    PixabayProvider pixabayProviderFalse =
+        Provider.of<PixabayProvider>(context, listen: false);
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        leading: const Icon(
-          Icons.menu,
-          size: 30,
-        ),
-        scrolledUnderElevation: 0.1,
-        title: TextField(
-          onChanged: (value) {
-            pixabayProvider.findImg(value);
-          },
-          controller: txtSearch,
-          cursorColor: Colors.black,
-          decoration: InputDecoration(
-            suffixIcon: GestureDetector(
-              onTap: () {
-              },
-              child: const Icon(Icons.close),
+        appBar: AppBar(
+          centerTitle: true,
+          leading: const Icon(
+            Icons.menu,
+            size: 30,
+          ),
+          scrolledUnderElevation: 0.1,
+          title: TextField(
+            onChanged: (value) {
+              pixabayProviderFalse.findImage(value);
+            },
+            controller: txtSearch,
+            decoration: InputDecoration(
+              hintText: 'Search',
+              suffixIcon: Icon(Icons.search),
+              enabledBorder: OutlineInputBorder(),
+              focusedBorder: OutlineInputBorder(),
+              border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                  borderSide: BorderSide(color: Colors.black, width: 1)),
             ),
-            prefixIcon: const Icon(Icons.search),
-            hintText: 'Search Images',
-            hintStyle: const TextStyle(color: Colors.grey),
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
-              borderSide: const BorderSide(
-                color: Colors.black,
-                width: 1,
-              ),
-            ),
-            focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
-              borderSide: const BorderSide(
-                color: Colors.black,
-                width: 1,
-              ),
-            ),
+            cursorColor: Colors.black,
           ),
         ),
-      ),
-      body: FutureBuilder(
-        future: Provider.of<PixabayProvider>(context, listen: false)
-            .fromMap(pixabayProvider.search),
-        builder: (context, snapshot) {
-          PixabayModal? apiModal = snapshot.data;
-          if (snapshot.hasData) {
-            return Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: ListView.builder(
-                itemCount: pixabayProvider.pixabayModal!.hits.length,
-                itemBuilder: (context, index) => Container(
-                  height: 300,
-                  width: double.infinity,
-                  margin: const EdgeInsets.all(10),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    image: DecorationImage(
-                      fit: BoxFit.cover,
-                      image: NetworkImage(apiModal!.hits[index].webformatURL),
-                    ),
+        body: FutureBuilder(
+          future: Provider.of<PixabayProvider>(context, listen: false).fromJson(
+              Provider.of<PixabayProvider>(context, listen: true).search),
+          builder: (context, snapshot) {
+            PixabayModal? listOfImage = snapshot.data;
+            if (snapshot.hasData) {
+              return ListView.builder(
+                itemCount: listOfImage!.hits.length,
+                itemBuilder: (context, index) => Padding(
+                  padding: const EdgeInsets.all(10),
+                  child: Container(
+                    height: 250,
+                    width: 200,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        image: DecorationImage(
+                          fit: BoxFit.cover,
+                          image: NetworkImage(
+                              listOfImage.hits[index].webformatURL),
+                        )),
                   ),
-
                 ),
-              ),
-            );
-          } else {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          }
-        },
-      ),
-    );
+              );
+            } else {
+              return Center(child: CircularProgressIndicator());
+            }
+          },
+        ));
   }
 }

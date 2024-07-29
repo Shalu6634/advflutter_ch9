@@ -1,10 +1,11 @@
+
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
 
 class RecipeApiHelper {
 
-  String api = 'https://pixabay.com/api/?key=45140193-022d8adb1e5eee0ac2ab1bcac&q=recipes&image_type=photo&pretty=true';
+  String api = 'https://dummyjson.com/recipes';
 
   Future<Map> Recipe_Api_Calling() async
   {
