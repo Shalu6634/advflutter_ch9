@@ -35,3 +35,12 @@ Define a model class to represent the data structure.
 Parse the JSON response into the model class.
 - Display the data in the UI:
 Use Flutter widgets to build the UI and display the fetched data.
+
+
+## Product
+<img src="https://github.com/user-attachments/assets/ade343a0-e6c6-4294-8aed-6a85cc609a77" height = 25%  width = 25%>
+<img src="https://github.com/user-attachments/assets/d196b04c-bffc-49a7-9ac8-31cdd270441f" height = 25%  width = 25%>
+
+
+
+
