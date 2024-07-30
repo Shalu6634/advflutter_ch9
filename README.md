@@ -20,6 +20,9 @@ Parse the JSON response into the model class.
 ##  Dummy Json API Calling
 
 <img src = "https://github.com/user-attachments/assets/37800012-2661-4793-afd5-ec6f2902d33f" height = 25%  width = 25%>
+<img src = "https://github.com/user-attachments/assets/eeedcbc7-f375-4cfe-8c61-9383fbb175b6" height = 25%  width = 25%>
+
+https://github.com/user-attachments/assets/3da9a08a-6fd4-4717-b88b-d34b12a83683
 
 Description :-
 - Ensure you have a Flutter project set up.
